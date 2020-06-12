@@ -29,6 +29,7 @@ class GameBoard {
         var colElement = document.createElement('div')
         colElement.innerHTML = 'B'
         colElement.className = 'col'
+        colElement.addEventListener('click', () => console.log('Clicked a column') )
         rowElement.append(colElement)
       }
       boardElement.append(rowElement)
@@ -133,23 +134,3 @@ class GameBoard {
 
 // //RENDER GAMEBOARD TO SCREEN
 var ticTacToe = new GameBoard();
-
-// var boardElement = document.createElement('div');
-// //for each space in the board, add something to the dom
-// for (var row of ticTacToe.board) {
-//   //render a row
-//   var rowElement = document.createElement('div');
-//   rowElement.className = 'row'
-//   for (var col of row) {
-//     //render a column
-//     console.log(col)
-//     var colElement = document.createElement('div')
-//     colElement.innerHTML = 'X'
-//     colElement.className = 'col'
-//     rowElement.append(colElement)
-//   }
-//   boardElement.append(rowElement)
-
-// }
-// //var row = document.createElement('div').innerHTML = 'BLANK'
-// document.getElementById('game-board').append(boardElement)
