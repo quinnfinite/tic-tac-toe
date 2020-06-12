@@ -16,20 +16,21 @@ class GameBoard {
 
 
   //placement
-  placeXorO(XorO, row, index){
+  placeXorO(row, index){
     var placement = this.board[row][index]
     if (!placement) {
-      this.board[row][index] = XorO
+      //this.board[row][index] = XorO
+      this.board[row][index] = this.currentPlayer;
       if (this.gameOverCheck()) {
-        console.log('Game Over - Start a new game')
+        //console.log('Game Over - Start a new game')
       } else {
-        console.log('Board : ', this.board)
+        //console.log('Board : ', this.board)
         this.toggleCurrentPlayer();
-        console.log(`${this.currentPlayer}'s turn`)
+        //console.log(`${this.currentPlayer}'s turn`)
       }
     } else {
-      console.log('There is already a marker there')
-      console.log(`It is still your turn player ${this.currentPlayer}`)
+//      console.log('There is already a marker there')
+      //console.log(`It is still your turn player ${this.currentPlayer}`)
     }
 
   }
