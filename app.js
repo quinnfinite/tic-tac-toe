@@ -3,16 +3,41 @@ document.getElementById('heading').innerHTML = 'Tic Tac Toe';
 
 class GameBoard {
   constructor(){
-    this.rowOne = [, , ]
-    this.rowTwo = [, , ]
-    this.rowThree = [, , ]
+    this.rowOne = [, , ];
+    this.rowTwo = [, , ];
+    this.rowThree = [, , ];
     this.board = [this.rowOne, this.rowTwo, this.rowThree]
+    console.log('Game Board is Ready')
+    this.playerOne = 'X';
+    this.playerTwo = 'O';
+    this.currentPlayer = this.playerOne;
   }
 
 
   //placement
   placeXorO(XorO, row, index){
-    this.board[row][index] = XorO
+    var placement = this.board[row][index]
+    if (!placement) {
+      this.board[row][index] = XorO
+      if (this.gameOverCheck()) {
+        console.log('Game Over - Start a new game')
+      } else {
+        console.log('Board : ', this.board)
+        console.log('Next player\'s turn')
+      }
+    } else {
+      console.log('There is already a marker there')
+      console.log('It is still your turn')
+    }
+
+  }
+  //toggle currentPlayer
+  toggleCurrentPlayer(){
+    if (this.currentPlayer === this.playerOne) {
+      this.currentPlayer === this.playerTwo;
+    } else {
+      this.currentPlayer === this.playerOne;
+    }
   }
   //check for win or tie
   winCheckRow(){
@@ -51,5 +76,31 @@ class GameBoard {
     return gameOver;
   }
 
+  winCheckDiagonal() {
+    var gameOver = false;
+
+    if(this.rowOne[0] !== undefined && this.rowOne[0] === this.rowTwo[1] && this.rowOne[0] === this.rowThree[2]) {
+      return gameOver = true;
+    }
+
+    if(this.rowOne[2] !== undefined && this.rowOne[2] === this.rowTwo[1] && this.rowOne[2] === this.rowThree[0]) {
+      return gameOver = true;
+    }
+
+    return gameOver;
+  }
+
   //game reset
+  gameOverCheck(){
+    var gameOver = false;
+    var rowGameOver = this.winCheckRow();
+    var colGameOver = this.winCheckCol();
+    var diagGameOver = this.winCheckDiagonal();
+
+    if(rowGameOver || colGameOver || diagGameOver) {
+      //console.log('Game Over');
+      gameOver = true;
+    }
+    return gameOver;
+  }
 }
