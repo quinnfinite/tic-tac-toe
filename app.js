@@ -45,13 +45,10 @@ class GameBoard {
           var index = this.classList[1]; //index
           ticTacToe.placeXorO(row, index)
         });
-        console.log('colElement', colElement)
         rowElement.append(colElement)
       }
       boardElement.append(rowElement)
-
     }
-    //var row = document.createElement('div').innerHTML = 'BLANK'
     document.getElementById('game-container').append(boardElement)
   }
 
@@ -60,13 +57,13 @@ class GameBoard {
     var placement = this.board[row][index]
     if (!placement) {
       this.board[row][index] = this.currentPlayer;
+      this.renderBoard();
       if (this.gameOverCheck()) {
         console.log('Game Over - Start a new game')
       } else {
         console.log('Board : ', this.board)
         this.AvailableSpaces--;
         this.toggleCurrentPlayer();
-        this.renderBoard();
         console.log(`${this.currentPlayer}'s turn`)
       }
     } else {
@@ -139,6 +136,8 @@ class GameBoard {
     } else {
       return false;
     }
+    //crete popup that says the game is over due to a tie
+    //give option to start a new game
   }
   //game reset
   gameOverCheck(){
@@ -148,7 +147,7 @@ class GameBoard {
     var diagGameOver = this.winCheckDiagonal();
     var tie = this.allSpacesAreTaken();
 
-    if(rowGameOver || colGameOver || diagGameOver || tie) {
+    if(rowGameOver || colGameOver || diagGameOver) {
       //console.log('Game Over');
       gameOver = true;
     }
@@ -158,4 +157,12 @@ class GameBoard {
 
 
 // //RENDER GAMEBOARD TO SCREEN
+
 var ticTacToe = new GameBoard();
+
+var newGameButton = document.createElement('button')
+newGameButton.innerHTML = 'New Game';
+newGameButton.addEventListener('click', () => {
+  ticTacToe = new GameBoard()
+})
+document.body.appendChild(newGameButton)
