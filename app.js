@@ -13,6 +13,8 @@ class GameBoard {
     this.playerTwo = 'O';
     this.currentPlayer = this.playerOne;
     this.gameOver = false;
+    this.lastWinner = '';
+    this.winningHistory = {X: 0, O:0};
     this.renderBoard();
     console.log('Game Board is Ready')
     console.log(`${this.currentPlayer}'s turn`)
@@ -155,9 +157,20 @@ class GameBoard {
       window.alert('All Spaces Are Taken. The Game Ends in a Tie. Start a New Game')
     } else if (rowGameOver || colGameOver || diagGameOver) {
       window.alert(`${this.currentPlayer} wins!!! Start a New Game`)
+      this.winningHistory[this.currentPlayer]++;
+      this.lastWinner = this.currentPlayer;
       this.gameOver = true;
     }
     return this.gameOver;
+  }
+  newGame() {
+    console.log('Setting up new Game')
+    this.gameOver = false;
+    this.rowOne = [ , , ,];
+    this.rowTwo = [ , , ,];
+    this.rowThree = [ , , ,];
+    this.board = [this.rowOne, this.rowTwo, this.rowThree]
+    this.renderBoard();
   }
 }
 
@@ -169,6 +182,8 @@ var ticTacToe = new GameBoard();
 var newGameButton = document.createElement('button')
 newGameButton.innerHTML = 'New Game';
 newGameButton.addEventListener('click', () => {
-  ticTacToe = new GameBoard()
+  console.log('New Game? ', ticTacToe)
+  ticTacToe.newGame();
+  //ticTacToe = new GameBoard()
 })
 document.body.appendChild(newGameButton)
