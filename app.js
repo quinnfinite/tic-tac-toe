@@ -14,7 +14,7 @@ class GameBoard {
     this.playerTwoName = prompt('What is your name, player Two?');
     this.playerTwo = 'O';
     this.currentPlayer = this.playerOne;
-    this.currentPlayerName = {X: this.playerOneName, O: this.playerTwoName};
+    this.playerNames = {X: this.playerOneName, O: this.playerTwoName};
     this.gameOver = false;
     this.lastWinner = '';
     this.winningHistory = {X: 0, O:0};
@@ -28,6 +28,7 @@ class GameBoard {
     var existingBoard = document.getElementById('game-board')
     if (existingBoard) {
       existingBoard.remove();
+      document.getElementById('player-names-container').remove();
       document.getElementById('current-player').remove()
     }
     //create new board
@@ -57,10 +58,23 @@ class GameBoard {
       boardElement.append(rowElement)
     }
     var gameContainer = document.getElementById('game-container');
+    //Append Players
+    var playerNamesContainer = document.createElement('div');
+    playerNamesContainer.id = 'player-names-container';
+    gameContainer.append(playerNamesContainer)
+    var playerOne = document.createElement('h2');
+    var playerTwo = document.createElement('h2');
+    playerOne.className ='player-name';
+    playerTwo.className = 'player-name';
+    playerOne.innerHTML = `${this.playerOne}'s - ${this.playerNames['X']}`;
+    playerTwo.innerHTML = `${this.playerTwo}'s - ${this.playerNames['O']}`;
+    playerNamesContainer.append(playerOne);
+    playerNamesContainer.append(playerTwo);
+
     //Append Current player's Turn
     var currentPlayerDiv = document.createElement('div');
     currentPlayerDiv.id = 'current-player';
-    currentPlayerDiv.innerHTML = `${this.currentPlayerName[this.currentPlayer]}'s turn - ${this.currentPlayer}'s`;
+    currentPlayerDiv.innerHTML = `${this.playerNames[this.currentPlayer]}'s turn - ${this.currentPlayer}'s`;
     gameContainer.append(currentPlayerDiv);
     //append Board
     gameContainer.append(boardElement)
@@ -195,7 +209,6 @@ var ticTacToe = new GameBoard();
 var newGameButton = document.createElement('button')
 newGameButton.innerHTML = 'New Game';
 newGameButton.addEventListener('click', () => {
-  console.log('New Game? ', ticTacToe)
   ticTacToe.newGame();
 })
 document.body.appendChild(newGameButton)
