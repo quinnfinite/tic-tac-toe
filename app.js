@@ -208,6 +208,7 @@ class GameBoard {
 var ticTacToe = new GameBoard();
 
 var newGameButton = document.createElement('button')
+newGameButton.className = 'new-game'
 newGameButton.innerHTML = 'New Game';
 newGameButton.addEventListener('click', () => {
   ticTacToe.newGame();
