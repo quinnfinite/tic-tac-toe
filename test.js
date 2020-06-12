@@ -36,7 +36,7 @@ myBoard.placeXorO(0, 1) // - O
 myBoard.placeXorO(0, 2) //-X
 console.log('Board - ', myBoard.board)
 // console.log('=======================')
-//debugger;
+debugger;
 console.log('Expected: False')
 console.log('Game Over - ', myBoard.winCheckRow())
 console.log('Expected: False')
@@ -134,7 +134,7 @@ console.log('*************************************************')
 //TEST FOR Diagonal GAME OVER - Expected True
 
 console.log('=======================')
-console.log('Game Over Check for Diagonal - True')
+console.log('Game Over Check for Diagonal - Forward False')
 // console.log('=======================')
 var myBoard = new GameBoard();
 // console.log('Board: ', myBoard)
@@ -146,9 +146,9 @@ myBoard.placeXorO(2, 2)
 console.log('Board - ', myBoard.board)
 // console.log('=======================')
 //debugger;
-console.log('Expected: True')
+console.log('Expected: False')
 console.log('Game Over - ', myBoard.winCheckDiagonal())
-console.log('Expected: True')
+console.log('Expected: False')
 console.log('Game Over Check - ', myBoard.gameOverCheck())
 
 

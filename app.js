@@ -8,6 +8,7 @@ class GameBoard {
     this.rowTwo = [ , , ,];
     this.rowThree = [ , , ,];
     this.board = [this.rowOne, this.rowTwo, this.rowThree]
+    this.AvailableSpaces = 9;
     this.playerOne = 'X';
     this.playerTwo = 'O';
     this.currentPlayer = this.playerOne;
@@ -26,19 +27,25 @@ class GameBoard {
     var boardElement = document.createElement('div');
     boardElement.id = 'game-board'
     //for each space in the board, add something to the dom
+    var rowCounter = 0;
     for (var row of this.board) {
       //render a row
       var rowElement = document.createElement('div');
-      rowElement.className = 'row'
+      rowElement.className = 'row';
+      rowElement.classList.add(rowCounter++);
+      var colCounter = 0;
       for (var col of row) {
         //render a column
         var colElement = document.createElement('div')
         colElement.innerHTML = col || '';
         colElement.className = 'col';
-        colElement.addEventListener('click', () => {
-          console.log('Clicked a column');
-          console.log('this', this)
+        colElement.classList.add(colCounter++);
+        colElement.addEventListener('click', function() {
+          var row = this.parentElement.classList[1]; //row
+          var index = this.classList[1]; //index
+          ticTacToe.placeXorO(row, index)
         });
+        console.log('colElement', colElement)
         rowElement.append(colElement)
       }
       boardElement.append(rowElement)
@@ -53,10 +60,11 @@ class GameBoard {
     var placement = this.board[row][index]
     if (!placement) {
       this.board[row][index] = this.currentPlayer;
-      if (this.gameOverCheck() === 'Banana') {
+      if (this.gameOverCheck()) {
         console.log('Game Over - Start a new game')
       } else {
         console.log('Board : ', this.board)
+        this.AvailableSpaces--;
         this.toggleCurrentPlayer();
         this.renderBoard();
         console.log(`${this.currentPlayer}'s turn`)
@@ -86,7 +94,7 @@ class GameBoard {
       var mark = row[0];
       var count = 0;
       for(var col of row) {
-        if(col === mark) {
+        if(col === mark && mark !== undefined) {
           count++;
         }
       }
@@ -125,15 +133,22 @@ class GameBoard {
 
     return gameOver;
   }
-
+  allSpacesAreTaken() {
+    if (this.AvailableSpaces === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   //game reset
   gameOverCheck(){
     var gameOver = false;
     var rowGameOver = this.winCheckRow();
     var colGameOver = this.winCheckCol();
     var diagGameOver = this.winCheckDiagonal();
+    var tie = this.allSpacesAreTaken();
 
-    if(rowGameOver || colGameOver || diagGameOver) {
+    if(rowGameOver || colGameOver || diagGameOver || tie) {
       //console.log('Game Over');
       gameOver = true;
     }
