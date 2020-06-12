@@ -90,7 +90,7 @@ class GameBoard {
       this.board[row][index] = this.currentPlayer;
       this.AvailableSpaces--;
       if (!this.gameOverCheck()) {
-        console.log('Board : ', this.board)
+        //console.log('Board : ', this.board)
         this.toggleCurrentPlayer();
         this.renderBoard();
         console.log(`${this.currentPlayer}'s turn`)
@@ -166,8 +166,6 @@ class GameBoard {
     } else {
       return false;
     }
-    //crete popup that says the game is over due to a tie
-    //give option to start a new game
   }
   //game reset
   gameOverCheck(){
