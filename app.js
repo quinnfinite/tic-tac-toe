@@ -1,5 +1,3 @@
-document.getElementById('heading').innerHTML = 'Tic Tac Toe';
-
 //GAMEBOARD OBJECT
 
 class GameBoard {
