@@ -1,0 +1,17 @@
+#game-board {
+  display: flex;
+  justify-content: center;
+}
+.row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.col {
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  padding: 25px;
+  font-size: 69px;
+
+}

@@ -1,16 +1,17 @@
 document.getElementById('heading').innerHTML = 'Tic Tac Toe';
 
+//GAMEBOARD OBJECT
 
 class GameBoard {
   constructor(){
-    this.rowOne = [, , ];
-    this.rowTwo = [, , ];
-    this.rowThree = [, , ];
+    this.rowOne = [ , , ,];
+    this.rowTwo = [ , , ,];
+    this.rowThree = [ , , ,];
     this.board = [this.rowOne, this.rowTwo, this.rowThree]
-    console.log('Game Board is Ready')
     this.playerOne = 'X';
     this.playerTwo = 'O';
     this.currentPlayer = this.playerOne;
+    console.log('Game Board is Ready')
     console.log(`${this.currentPlayer}'s turn`)
   }
 
@@ -19,18 +20,17 @@ class GameBoard {
   placeXorO(row, index){
     var placement = this.board[row][index]
     if (!placement) {
-      //this.board[row][index] = XorO
       this.board[row][index] = this.currentPlayer;
       if (this.gameOverCheck()) {
-        //console.log('Game Over - Start a new game')
+        console.log('Game Over - Start a new game')
       } else {
-        //console.log('Board : ', this.board)
+        console.log('Board : ', this.board)
         this.toggleCurrentPlayer();
-        //console.log(`${this.currentPlayer}'s turn`)
+        console.log(`${this.currentPlayer}'s turn`)
       }
     } else {
-//      console.log('There is already a marker there')
-      //console.log(`It is still your turn player ${this.currentPlayer}`)
+      console.log('There is already a marker there')
+      console.log(`It is still your turn player ${this.currentPlayer}`)
     }
 
   }
@@ -107,3 +107,25 @@ class GameBoard {
     return gameOver;
   }
 }
+
+//RENDER GAMEBOARD TO SCREEN
+var ticTacToe = new GameBoard();
+var boardElement = document.createElement('div');
+//for each space in the board, add something to the dom
+console.log(ticTacToe);
+for (var row of ticTacToe.board) {
+  //render a row
+  var rowElement = document.createElement('div');
+  rowElement.className = 'row'
+  for (var col of row) {
+    //render a column
+    var colElement = document.createElement('div')
+    colElement.innerHTML = 'X'
+    colElement.className = 'col'
+    rowElement.append(colElement)
+  }
+  boardElement.append(rowElement)
+
+}
+//var row = document.createElement('div').innerHTML = 'BLANK'
+document.getElementById('game-board').append(boardElement)
