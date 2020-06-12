@@ -11,10 +11,32 @@ class GameBoard {
     this.playerOne = 'X';
     this.playerTwo = 'O';
     this.currentPlayer = this.playerOne;
+    this.renderBoard();
     console.log('Game Board is Ready')
     console.log(`${this.currentPlayer}'s turn`)
   }
+  //RENDER GAMEBOARD TO SCREEN
+  renderBoard () {
+    var boardElement = document.createElement('div');
+    //for each space in the board, add something to the dom
+    for (var row of this.board) {
+      //render a row
+      var rowElement = document.createElement('div');
+      rowElement.className = 'row'
+      for (var col of row) {
+        //render a column
+        console.log(col)
+        var colElement = document.createElement('div')
+        colElement.innerHTML = 'B'
+        colElement.className = 'col'
+        rowElement.append(colElement)
+      }
+      boardElement.append(rowElement)
 
+    }
+    //var row = document.createElement('div').innerHTML = 'BLANK'
+    document.getElementById('game-board').append(boardElement)
+  }
 
   //placement
   placeXorO(row, index){
@@ -108,24 +130,26 @@ class GameBoard {
   }
 }
 
-//RENDER GAMEBOARD TO SCREEN
-var ticTacToe = new GameBoard();
-var boardElement = document.createElement('div');
-//for each space in the board, add something to the dom
-console.log(ticTacToe);
-for (var row of ticTacToe.board) {
-  //render a row
-  var rowElement = document.createElement('div');
-  rowElement.className = 'row'
-  for (var col of row) {
-    //render a column
-    var colElement = document.createElement('div')
-    colElement.innerHTML = 'X'
-    colElement.className = 'col'
-    rowElement.append(colElement)
-  }
-  boardElement.append(rowElement)
 
-}
-//var row = document.createElement('div').innerHTML = 'BLANK'
-document.getElementById('game-board').append(boardElement)
+// //RENDER GAMEBOARD TO SCREEN
+var ticTacToe = new GameBoard();
+
+// var boardElement = document.createElement('div');
+// //for each space in the board, add something to the dom
+// for (var row of ticTacToe.board) {
+//   //render a row
+//   var rowElement = document.createElement('div');
+//   rowElement.className = 'row'
+//   for (var col of row) {
+//     //render a column
+//     console.log(col)
+//     var colElement = document.createElement('div')
+//     colElement.innerHTML = 'X'
+//     colElement.className = 'col'
+//     rowElement.append(colElement)
+//   }
+//   boardElement.append(rowElement)
+
+// }
+// //var row = document.createElement('div').innerHTML = 'BLANK'
+// document.getElementById('game-board').append(boardElement)
