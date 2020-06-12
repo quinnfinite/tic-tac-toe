@@ -58,15 +58,14 @@ class GameBoard {
     var placement = this.board[row][index]
     if (this.gameOver) {
       window.alert('The Game is Over. Start a New Game');
+      console.log(`Current Player: ${this.currentPlayer}`)
       return;
     }
     if (!placement) {
       this.board[row][index] = this.currentPlayer;
       this.renderBoard();
       this.AvailableSpaces--;
-      if (this.gameOverCheck()) {
-        console.log('Game Over - Start a new game')
-      } else {
+      if (!this.gameOverCheck()) {
         console.log('Board : ', this.board)
         this.toggleCurrentPlayer();
         console.log(`${this.currentPlayer}'s turn`)
@@ -89,7 +88,7 @@ class GameBoard {
   winCheckRow(){
     //check each row for three straight characters
     //iterate over each row
-    var gameOver = false;
+    //var gameOver = false;
     for (var row of this.board) {
       //iterate through each column in the row
       //keep track of what the first item is
@@ -102,10 +101,10 @@ class GameBoard {
       }
       //if count is === 3 -- game over
       if(count === 3) {
-        return gameOver = true;
+        this.gameOver = true;
       }
     }
-    return gameOver;
+    return this.gameOver;
   }
   //winCheck on columns
   winCheckCol(){
@@ -113,28 +112,28 @@ class GameBoard {
     //for each index in that row, check the same index at each other row
     //if they are all the same character
     //game is over
-    var gameOver = false;
+    // var gameOver = false;
 
     for (var i = 0; i < this.rowOne.length; i++) {
       if(this.rowOne[i] !== undefined && this.rowOne[i] === this.rowTwo[i] && this.rowOne[i] === this.rowThree[i]) {
-        return gameOver = true;
+        return this.gameOver = true;
       }
     }
-    return gameOver;
+    return this.gameOver;
   }
 
   winCheckDiagonal() {
-    var gameOver = false;
+    //var gameOver = false;
 
     if(this.rowOne[0] !== undefined && this.rowOne[0] === this.rowTwo[1] && this.rowOne[0] === this.rowThree[2]) {
-      return gameOver = true;
+      return this.gameOver = true;
     }
 
     if(this.rowOne[2] !== undefined && this.rowOne[2] === this.rowTwo[1] && this.rowOne[2] === this.rowThree[0]) {
-      return gameOver = true;
+      return this.gameOver = true;
     }
 
-    return gameOver;
+    return this.gameOver;
   }
   allSpacesAreTaken() {
     if (this.AvailableSpaces === 0) {
