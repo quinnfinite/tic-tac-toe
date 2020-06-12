@@ -49,3 +49,8 @@ body {
   font-family: 'Fredericka the Great', cursive;
   font-size: 24px
 }
+
+.new-game:hover {
+  background-color: gb(240,240,240);
+  border:inset;
+}
