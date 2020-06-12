@@ -11,6 +11,7 @@ class GameBoard {
     this.playerOne = 'X';
     this.playerTwo = 'O';
     this.currentPlayer = this.playerOne;
+    console.log(`${this.currentPlayer}'s turn`)
   }
 
 
@@ -23,20 +24,21 @@ class GameBoard {
         console.log('Game Over - Start a new game')
       } else {
         console.log('Board : ', this.board)
-        console.log('Next player\'s turn')
+        this.toggleCurrentPlayer();
+        console.log(`${this.currentPlayer}'s turn`)
       }
     } else {
       console.log('There is already a marker there')
-      console.log('It is still your turn')
+      console.log(`It is still your turn player ${this.currentPlayer}`)
     }
 
   }
   //toggle currentPlayer
   toggleCurrentPlayer(){
     if (this.currentPlayer === this.playerOne) {
-      this.currentPlayer === this.playerTwo;
+      this.currentPlayer = this.playerTwo;
     } else {
-      this.currentPlayer === this.playerOne;
+      this.currentPlayer = this.playerOne;
     }
   }
   //check for win or tie
