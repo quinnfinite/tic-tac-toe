@@ -25,6 +25,7 @@ class GameBoard {
     var existingBoard = document.getElementById('game-board')
     if (existingBoard) {
       existingBoard.remove();
+      document.getElementById('current-player').remove()
     }
     //create new board
     var boardElement = document.createElement('div');
@@ -52,7 +53,14 @@ class GameBoard {
       }
       boardElement.append(rowElement)
     }
-    document.getElementById('game-container').append(boardElement)
+    var gameContainer = document.getElementById('game-container');
+    //Append Current player's Turn
+    var currentPlayerDiv = document.createElement('div');
+    currentPlayerDiv.id = 'current-player';
+    currentPlayerDiv.innerHTML = `${this.currentPlayer}'s turn`;
+    gameContainer.append(currentPlayerDiv);
+    //append Board
+    gameContainer.append(boardElement)
   }
 
   //placement
@@ -65,11 +73,11 @@ class GameBoard {
     }
     if (!placement) {
       this.board[row][index] = this.currentPlayer;
-      this.renderBoard();
       this.AvailableSpaces--;
       if (!this.gameOverCheck()) {
         console.log('Board : ', this.board)
         this.toggleCurrentPlayer();
+        this.renderBoard();
         console.log(`${this.currentPlayer}'s turn`)
       }
     } else {
@@ -170,6 +178,7 @@ class GameBoard {
     this.rowTwo = [ , , ,];
     this.rowThree = [ , , ,];
     this.board = [this.rowOne, this.rowTwo, this.rowThree]
+    this.AvailableSpaces = 9;
     this.renderBoard();
   }
 }
