@@ -3,9 +3,9 @@ document.getElementById('heading').innerHTML = 'Tic Tac Toe';
 
 class GameBoard {
   constructor(){
-    this.rowOne = [null, null, null]
-    this.rowTwo = [null, null, null]
-    this.rowThree = [null, null, null]
+    this.rowOne = [, , ]
+    this.rowTwo = [, , ]
+    this.rowThree = [, , ]
     this.board = [this.rowOne, this.rowTwo, this.rowThree]
   }
 
@@ -31,6 +31,20 @@ class GameBoard {
       }
       //if count is === 3 -- game over
       if(count === 3) {
+        return gameOver = true;
+      }
+    }
+    return gameOver;
+  }
+  //winCheck on columns
+  winCheckCol(){
+    //iterate over a single row
+    //for each index in that row, check the same index at each other row
+    //if they are all the same character
+    //game is over
+    var gameOver = false;
+    for (var i = 0; i < this.rowOne.length; i++) {
+      if(this.rowOne[i] !== undefined && this.rowOne[i] === this.rowTwo[i] && this.rowOne[i] === this.rowThree[i]) {
         return gameOver = true;
       }
     }
