@@ -162,9 +162,11 @@ class GameBoard {
     var tie = this.allSpacesAreTaken();
     if (tie) {
       this.gameOver = true;
+      this.renderBoard();
       window.alert('All Spaces Are Taken. The Game Ends in a Tie. Start a New Game')
     } else if (rowGameOver || colGameOver || diagGameOver) {
-      window.alert(`${this.currentPlayer} wins!!! Start a New Game`)
+      this.renderBoard();
+      window.alert(`${this.currentPlayer} wins!!! Start a New Game`);
       this.winningHistory[this.currentPlayer]++;
       this.lastWinner = this.currentPlayer;
       this.gameOver = true;
@@ -193,6 +195,5 @@ newGameButton.innerHTML = 'New Game';
 newGameButton.addEventListener('click', () => {
   console.log('New Game? ', ticTacToe)
   ticTacToe.newGame();
-  //ticTacToe = new GameBoard()
 })
 document.body.appendChild(newGameButton)
