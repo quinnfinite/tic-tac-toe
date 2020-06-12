@@ -66,8 +66,8 @@ class GameBoard {
     var playerTwo = document.createElement('h2');
     playerOne.className ='player-name';
     playerTwo.className = 'player-name';
-    playerOne.innerHTML = `${this.playerOne}'s - ${this.playerNames['X']}`;
-    playerTwo.innerHTML = `${this.playerTwo}'s - ${this.playerNames['O']}`;
+    playerOne.innerHTML = `${this.playerOne}'s - ${this.playerNames['X']} - ${this.winningHistory['X']} wins`;
+    playerTwo.innerHTML = `${this.playerTwo}'s - ${this.playerNames['O']} - ${this.winningHistory['O']} wins`;
     playerNamesContainer.append(playerOne);
     playerNamesContainer.append(playerTwo);
 
@@ -182,11 +182,12 @@ class GameBoard {
       this.renderBoard();
       window.alert('All Spaces Are Taken. The Game Ends in a Tie. Start a New Game')
     } else if (rowGameOver || colGameOver || diagGameOver) {
-      this.renderBoard();
+
       window.alert(`${this.currentPlayer} wins!!! Start a New Game`);
       this.winningHistory[this.currentPlayer]++;
       this.lastWinner = this.currentPlayer;
       this.gameOver = true;
+      this.renderBoard();
     }
     return this.gameOver;
   }
