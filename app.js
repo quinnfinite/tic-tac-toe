@@ -12,6 +12,7 @@ class GameBoard {
     this.playerOne = 'X';
     this.playerTwo = 'O';
     this.currentPlayer = this.playerOne;
+    this.gameOver = false;
     this.renderBoard();
     console.log('Game Board is Ready')
     console.log(`${this.currentPlayer}'s turn`)
@@ -55,14 +56,18 @@ class GameBoard {
   //placement
   placeXorO(row, index){
     var placement = this.board[row][index]
+    if (this.gameOver) {
+      window.alert('The Game is Over. Start a New Game');
+      return;
+    }
     if (!placement) {
       this.board[row][index] = this.currentPlayer;
       this.renderBoard();
+      this.AvailableSpaces--;
       if (this.gameOverCheck()) {
         console.log('Game Over - Start a new game')
       } else {
         console.log('Board : ', this.board)
-        this.AvailableSpaces--;
         this.toggleCurrentPlayer();
         console.log(`${this.currentPlayer}'s turn`)
       }
@@ -109,6 +114,7 @@ class GameBoard {
     //if they are all the same character
     //game is over
     var gameOver = false;
+
     for (var i = 0; i < this.rowOne.length; i++) {
       if(this.rowOne[i] !== undefined && this.rowOne[i] === this.rowTwo[i] && this.rowOne[i] === this.rowThree[i]) {
         return gameOver = true;
@@ -141,17 +147,18 @@ class GameBoard {
   }
   //game reset
   gameOverCheck(){
-    var gameOver = false;
     var rowGameOver = this.winCheckRow();
     var colGameOver = this.winCheckCol();
     var diagGameOver = this.winCheckDiagonal();
     var tie = this.allSpacesAreTaken();
-
-    if(rowGameOver || colGameOver || diagGameOver) {
-      //console.log('Game Over');
-      gameOver = true;
+    if (tie) {
+      this.gameOver = true;
+      window.alert('All Spaces Are Taken. The Game Ends in a Tie. Start a New Game')
+    } else if (rowGameOver || colGameOver || diagGameOver) {
+      window.alert(`${this.currentPlayer} wins!!! Start a New Game`)
+      this.gameOver = true;
     }
-    return gameOver;
+    return this.gameOver;
   }
 }
 
