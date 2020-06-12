@@ -17,7 +17,14 @@ class GameBoard {
   }
   //RENDER GAMEBOARD TO SCREEN
   renderBoard () {
+    //if board is already rendered...remove it
+    var existingBoard = document.getElementById('game-board')
+    if (existingBoard) {
+      existingBoard.remove();
+    }
+    //create new board
     var boardElement = document.createElement('div');
+    boardElement.id = 'game-board'
     //for each space in the board, add something to the dom
     for (var row of this.board) {
       //render a row
@@ -25,18 +32,20 @@ class GameBoard {
       rowElement.className = 'row'
       for (var col of row) {
         //render a column
-        console.log(col)
         var colElement = document.createElement('div')
-        colElement.innerHTML = 'B'
-        colElement.className = 'col'
-        colElement.addEventListener('click', () => console.log('Clicked a column') )
+        colElement.innerHTML = col || '';
+        colElement.className = 'col';
+        colElement.addEventListener('click', () => {
+          console.log('Clicked a column');
+          console.log('this', this)
+        });
         rowElement.append(colElement)
       }
       boardElement.append(rowElement)
 
     }
     //var row = document.createElement('div').innerHTML = 'BLANK'
-    document.getElementById('game-board').append(boardElement)
+    document.getElementById('game-container').append(boardElement)
   }
 
   //placement
@@ -44,11 +53,12 @@ class GameBoard {
     var placement = this.board[row][index]
     if (!placement) {
       this.board[row][index] = this.currentPlayer;
-      if (this.gameOverCheck()) {
+      if (this.gameOverCheck() === 'Banana') {
         console.log('Game Over - Start a new game')
       } else {
         console.log('Board : ', this.board)
         this.toggleCurrentPlayer();
+        this.renderBoard();
         console.log(`${this.currentPlayer}'s turn`)
       }
     } else {
