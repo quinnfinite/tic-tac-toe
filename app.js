@@ -10,8 +10,11 @@ class GameBoard {
     this.board = [this.rowOne, this.rowTwo, this.rowThree]
     this.AvailableSpaces = 9;
     this.playerOne = 'X';
+    this.playerOneName = prompt('What is your name, player One?');
+    this.playerTwoName = prompt('What is your name, player Two?');
     this.playerTwo = 'O';
     this.currentPlayer = this.playerOne;
+    this.currentPlayerName = {X: this.playerOneName, O: this.playerTwoName};
     this.gameOver = false;
     this.lastWinner = '';
     this.winningHistory = {X: 0, O:0};
@@ -57,7 +60,7 @@ class GameBoard {
     //Append Current player's Turn
     var currentPlayerDiv = document.createElement('div');
     currentPlayerDiv.id = 'current-player';
-    currentPlayerDiv.innerHTML = `${this.currentPlayer}'s turn`;
+    currentPlayerDiv.innerHTML = `${this.currentPlayerName[this.currentPlayer]}'s turn - ${this.currentPlayer}'s`;
     gameContainer.append(currentPlayerDiv);
     //append Board
     gameContainer.append(boardElement)
@@ -184,7 +187,6 @@ class GameBoard {
     this.renderBoard();
   }
 }
-
 
 // //RENDER GAMEBOARD TO SCREEN
 
