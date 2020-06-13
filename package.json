@@ -4,7 +4,8 @@
   "description": "Tic Tac Toe game",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server/index.js",
+    "dev": "nodemon server/index.js",
+    "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/quinnfinite/tic-tac-toe#readme",
   "dependencies": {
     "epxress": "0.0.1-security",
+    "express": "^4.17.1",
     "helmet": "^3.23.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4"
