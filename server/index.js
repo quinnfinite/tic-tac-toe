@@ -10,7 +10,8 @@ app.use(morgan('tiny'))
 app.use(express.static(path.join(__dirname, '../client')));
 
 app.get('/', (req, res) => {
-  res.sendFile('index');
+  res.send('Hello, I am running')
+  //res.sendFile('index');
 })
 
 const port = process.env.port || 3000;
