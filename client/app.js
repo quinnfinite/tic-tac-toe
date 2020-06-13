@@ -68,7 +68,6 @@ class GameBoard {
     playerTwo.innerHTML = `${this.playerTwo}'s - ${this.playerNames['O']} - ${this.winningHistory['O']} wins`;
     playerNamesContainer.append(playerOne);
     playerNamesContainer.append(playerTwo);
-
     //Append Current player's Turn
     var currentPlayerDiv = document.createElement('div');
     currentPlayerDiv.id = 'current-player';
@@ -90,7 +89,6 @@ class GameBoard {
       this.board[row][index] = this.currentPlayer;
       this.AvailableSpaces--;
       if (!this.gameOverCheck()) {
-        //console.log('Board : ', this.board)
         this.toggleCurrentPlayer();
         this.renderBoard();
         console.log(`${this.currentPlayer}'s turn`)
@@ -111,12 +109,7 @@ class GameBoard {
   }
   //check for win or tie
   winCheckRow(){
-    //check each row for three straight characters
-    //iterate over each row
-    //var gameOver = false;
     for (var row of this.board) {
-      //iterate through each column in the row
-      //keep track of what the first item is
       var mark = row[0];
       var count = 0;
       for(var col of row) {
@@ -124,7 +117,6 @@ class GameBoard {
           count++;
         }
       }
-      //if count is === 3 -- game over
       if(count === 3) {
         this.gameOver = true;
       }
@@ -133,12 +125,6 @@ class GameBoard {
   }
   //winCheck on columns
   winCheckCol(){
-    //iterate over a single row
-    //for each index in that row, check the same index at each other row
-    //if they are all the same character
-    //game is over
-    // var gameOver = false;
-
     for (var i = 0; i < this.rowOne.length; i++) {
       if(this.rowOne[i] !== undefined && this.rowOne[i] === this.rowTwo[i] && this.rowOne[i] === this.rowThree[i]) {
         return this.gameOver = true;
@@ -148,16 +134,12 @@ class GameBoard {
   }
 
   winCheckDiagonal() {
-    //var gameOver = false;
-
     if(this.rowOne[0] !== undefined && this.rowOne[0] === this.rowTwo[1] && this.rowOne[0] === this.rowThree[2]) {
       return this.gameOver = true;
     }
-
     if(this.rowOne[2] !== undefined && this.rowOne[2] === this.rowTwo[1] && this.rowOne[2] === this.rowThree[0]) {
       return this.gameOver = true;
     }
-
     return this.gameOver;
   }
   allSpacesAreTaken() {
