@@ -20,7 +20,7 @@
   "homepage": "https://github.com/quinnfinite/tic-tac-toe#readme",
   "dependencies": {
     "epxress": "0.0.1-security",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "helmet": "^3.23.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4"
